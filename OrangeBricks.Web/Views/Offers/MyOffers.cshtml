@@ -1,0 +1,40 @@
+﻿@model OrangeBricks.Web.Controllers.Offers.ViewModels.MyOffersViewModel
+
+@{
+    ViewBag.Title = "My Offers";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>My Offers</h2>
+
+<p>Here is a list of your offers:</p>
+
+@foreach (var offerOnProperty in Model.OffersOnProperty)
+{
+    var offer = offerOnProperty.Offers.Single();
+
+    <hr />
+    <div id="offer-@offer.Id">
+        <h3>@offerOnProperty.StreetName</h3>
+        <p>@offerOnProperty.NumberOfBedrooms bedroom @offerOnProperty.PropertyType</p>
+        <p>@offerOnProperty.Description</p>
+        <br />
+        <div>
+            <p><strong>Offer Amount: </strong> £@offer.Amount</p>
+            <p><strong>Offer Made At: </strong> @offer.CreatedAt.ToLongTimeString() on @offer.CreatedAt.ToShortDateString()</p>
+            <p>
+                <strong>Status: </strong>
+                @if (offer.Status == "Accepted")
+                {
+                    <span class="alert alert-success accepted">
+                        <strong>@offer.Status!</strong>
+                    </span>
+                }
+                else
+                {
+                    @offer.Status
+                }
+            </p>
+        </div>
+    </div>
+}

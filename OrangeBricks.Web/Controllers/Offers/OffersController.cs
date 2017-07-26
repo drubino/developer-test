@@ -3,10 +3,10 @@ using OrangeBricks.Web.Attributes;
 using OrangeBricks.Web.Controllers.Offers.Builders;
 using OrangeBricks.Web.Controllers.Offers.Commands;
 using OrangeBricks.Web.Models;
+using Microsoft.AspNet.Identity;
 
 namespace OrangeBricks.Web.Controllers.Offers
 {
-    [OrangeBricksAuthorize(Roles = "Seller")]
     public class OffersController : Controller
     {
         private readonly IOrangeBricksContext _context;
@@ -16,6 +16,16 @@ namespace OrangeBricks.Web.Controllers.Offers
             _context = context;
         }
 
+        public ActionResult MyOffers()
+        {
+            var username = this.User.Identity.GetUserName();
+            var builder = new MyOffersViewModelBuilder(username, _context);
+            var viewModel = builder.Build();
+
+            return View(viewModel);
+        }
+
+        [OrangeBricksAuthorize(Roles = "Seller")]
         public ActionResult OnProperty(int id)
         {
             var builder = new OffersOnPropertyViewModelBuilder(_context);
@@ -24,7 +34,8 @@ namespace OrangeBricks.Web.Controllers.Offers
             return View(viewModel);
         }
 
-        [HttpPost]        
+        [HttpPost]
+        [OrangeBricksAuthorize(Roles = "Seller")]
         public ActionResult Accept(AcceptOfferCommand command)
         {
             var handler = new AcceptOfferCommandHandler(_context);
@@ -35,6 +46,7 @@ namespace OrangeBricks.Web.Controllers.Offers
         }
 
         [HttpPost]
+        [OrangeBricksAuthorize(Roles = "Seller")]
         public ActionResult Reject(RejectOfferCommand command)
         {
             var handler = new RejectOfferCommandHandler(_context);
