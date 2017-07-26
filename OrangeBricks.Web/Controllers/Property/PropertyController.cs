@@ -85,7 +85,7 @@ namespace OrangeBricks.Web.Controllers.Property
         [OrangeBricksAuthorize(Roles = "Buyer")]
         public ActionResult MakeOffer(MakeOfferCommand command)
         {
-            var handler = new MakeOfferCommandHandler(_context);
+            var handler = new MakeOfferCommandHandler(this.User, _context);
 
             handler.Handle(command);
 

@@ -66,6 +66,7 @@ namespace OrangeBricks.Web.Models
     {
         [Required]
         [EmailAddress]
+        [StringLength(100, ErrorMessage = "Your email address can be at most 100 characters long.")]
         [Display(Name = "Email")]
         public string Email { get; set; }
 
