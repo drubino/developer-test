@@ -35,11 +35,11 @@ namespace OrangeBricks.Web.Tests.Controllers.Property.Builders
         public void BuildShouldReturnPropertiesWithMatchingStreetNamesWhenSearchTermIsProvided()
         {
             // Arrange
-            var builder = new PropertiesViewModelBuilder(_context);
+            var builder = new PropertiesViewModelBuilder(string.Empty, _context);
 
             var properties = new List<Models.Property>{
-                new Models.Property{ StreetName = "Smith Street", Description = "", IsListedForSale = true },
-                new Models.Property{ StreetName = "Jones Street", Description = "", IsListedForSale = true}
+                new Models.Property{ StreetName = "Smith Street", Description = "", IsListedForSale = true, Offers = new Offer[0] },
+                new Models.Property{ StreetName = "Jones Street", Description = "", IsListedForSale = true, Offers = new Offer[0]}
             };
 
             var mockSet = Substitute.For<IDbSet<Models.Property>>()
@@ -63,11 +63,11 @@ namespace OrangeBricks.Web.Tests.Controllers.Property.Builders
         public void BuildShouldReturnPropertiesWithMatchingDescriptionsWhenSearchTermIsProvided()
         {
             // Arrange
-            var builder = new PropertiesViewModelBuilder(_context);
+            var builder = new PropertiesViewModelBuilder(string.Empty, _context);
 
             var properties = new List<Models.Property>{
-                new Models.Property{ StreetName = "", Description = "Great location", IsListedForSale = true },
-                new Models.Property{ StreetName = "", Description = "Town house", IsListedForSale = true }
+                new Models.Property{ StreetName = "", Description = "Great location", IsListedForSale = true, Offers = new Offer[0] },
+                new Models.Property{ StreetName = "", Description = "Town house", IsListedForSale = true, Offers = new Offer[0] }
             };
 
             var mockSet = Substitute.For<IDbSet<Models.Property>>()

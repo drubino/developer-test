@@ -10,31 +10,30 @@ namespace OrangeBricks.Web.Controllers.Property.Commands
 {
     public class MakeOfferCommandHandler
     {
-        private readonly IPrincipal _user;
+        private readonly string _username;
         private readonly IOrangeBricksContext _context;
 
-        public MakeOfferCommandHandler(IPrincipal user, IOrangeBricksContext context)
+        public MakeOfferCommandHandler(string username, IOrangeBricksContext context)
         {
-            _user = user;
+            _username = username;
             _context = context;
         }
 
         public void Handle(MakeOfferCommand command)
         {
-            var username = _user.Identity.GetUserName();
             var property = _context.Properties
                 .Include("Offers")
                 .FirstOrDefault(p => p.Id == command.PropertyId);
 
-            var existingOffer = property.Offers.SingleOrDefault(o => o.Username == username);
+            var existingOffer = property.Offers.SingleOrDefault(o => o.Username == _username);
             if (existingOffer != null)
                 throw new InvalidOperationException(
-                    string.Format("{0} has already made an offer on property {1}", username, property.Id));
+                    string.Format("{0} has already made an offer on property {1}", _username, property.Id));
 
             var offer = new Offer
             {
                 PropertyId = property.Id,
-                Username = username,
+                Username = _username,
                 Amount = command.Offer,
                 Status = OfferStatus.Pending,
                 CreatedAt = DateTime.Now,

@@ -22,7 +22,8 @@ namespace OrangeBricks.Web.Controllers.Property
         [Authorize]
         public ActionResult Index(PropertiesQuery query)
         {
-            var builder = new PropertiesViewModelBuilder(_context);
+            var username = this.User.Identity.GetUserName();
+            var builder = new PropertiesViewModelBuilder(username, _context);
             var viewModel = builder.Build(query);
 
             return View(viewModel);
@@ -85,8 +86,8 @@ namespace OrangeBricks.Web.Controllers.Property
         [OrangeBricksAuthorize(Roles = "Buyer")]
         public ActionResult MakeOffer(MakeOfferCommand command)
         {
-            var handler = new MakeOfferCommandHandler(this.User, _context);
-
+            var username = this.User.Identity.GetUserName();
+            var handler = new MakeOfferCommandHandler(username, _context);
             handler.Handle(command);
 
             return RedirectToAction("Index");
