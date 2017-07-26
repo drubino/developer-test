@@ -9,32 +9,34 @@
 
 <p>Here is a list of your offers:</p>
 
-@foreach (var offerOnProperty in Model.OffersOnProperty)
+@if (Model.OffersOnProperty.Any())
 {
-    var offer = offerOnProperty.Offers.Single();
+    foreach (var offerOnProperty in Model.OffersOnProperty)
+    {
+        var offer = offerOnProperty.Offers.Single();
 
-    <hr />
-    <div id="offer-@offer.Id">
-        <h3>@offerOnProperty.StreetName</h3>
-        <p>@offerOnProperty.NumberOfBedrooms bedroom @offerOnProperty.PropertyType</p>
-        <p>@offerOnProperty.Description</p>
-        <br />
-        <div>
-            <p><strong>Offer Amount: </strong> £@offer.Amount</p>
-            <p><strong>Offer Made At: </strong> @offer.CreatedAt.ToLongTimeString() on @offer.CreatedAt.ToShortDateString()</p>
-            <p>
-                <strong>Status: </strong>
-                @if (offer.Status == "Accepted")
-                {
-                    <span class="alert alert-success accepted">
-                        <strong>@offer.Status!</strong>
-                    </span>
-                }
-                else
-                {
-                    @offer.Status
-                }
-            </p>
+        <hr />
+        <div id="offer-@offer.Id">
+            <h3>@offerOnProperty.StreetName</h3>
+            <p>@offerOnProperty.NumberOfBedrooms bedroom @offerOnProperty.PropertyType</p>
+            <p>@offerOnProperty.Description</p>
+            <br />
+            <div>
+                <p><strong>Offer Amount: </strong> £@offer.Amount</p>
+                <p><strong>Offer Made At: </strong> @offer.CreatedAt.ToLongTimeString() on @offer.CreatedAt.ToShortDateString()</p>
+                <p>
+                    <strong>Status: </strong>
+                    <div class="alert @offer.StatusClass">
+                        <strong>@offer.Status</strong>
+                    </div>
+                </p>
+            </div>
         </div>
+    }
+}
+else
+{
+    <div class="alert alert-info" role="alert">
+        You haven't made any offers yet!
     </div>
 }
