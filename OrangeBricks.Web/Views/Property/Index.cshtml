@@ -30,7 +30,16 @@
     <p>@property.NumberOfBedrooms bedroom @property.PropertyType</p>
     <p>@property.Description</p>
 
-    <a href="@Url.Action("MakeOffer", "Property", new {id = property.Id})" class="btn btn-primary">
-        Make Offer
-    </a>
+    if (property.HasOffer)
+    {
+        <a href="@Url.Action("MyOffers", "Offer")#offer-@property.Offer.Id" class="btn btn-default">
+            View Offer
+        </a>
+    }
+    else
+    {
+        <a href="@Url.Action("MakeOffer", "Property", new { id = property.Id })" class="btn btn-primary">
+            Make Offer
+        </a>
+    }
 }
