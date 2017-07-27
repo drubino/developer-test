@@ -1,5 +1,6 @@
 namespace OrangeBricks.Web.Migrations
 {
+    using OrangeBricks.Web.Models;
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Migrations;
@@ -13,20 +14,12 @@ namespace OrangeBricks.Web.Migrations
             ContextKey = "OrangeBricks.Web.Models.ApplicationDbContext";
         }
 
-        protected override void Seed(OrangeBricks.Web.Models.ApplicationDbContext context)
+        protected override void Seed(ApplicationDbContext context)
         {
-            //  This method will be called after migrating to the latest version.
-
-            //  You can use the DbSet<T>.AddOrUpdate() helper extension method 
-            //  to avoid creating duplicate seed data. E.g.
-            //
-            //    context.People.AddOrUpdate(
-            //      p => p.FullName,
-            //      new Person { FullName = "Andrew Peters" },
-            //      new Person { FullName = "Brice Lambson" },
-            //      new Person { FullName = "Rowan Miller" }
-            //    );
-            //
+            context.Locations.AddOrUpdate(new Location { Name = "New York", TimeZone = "Eastern Standard Time" });
+            context.Locations.AddOrUpdate(new Location { Name = "Chicago", TimeZone = "Central Standard Time" });
+            context.Locations.AddOrUpdate(new Location { Name = "Denver", TimeZone = "Mountain Standard Time" });
+            context.Locations.AddOrUpdate(new Location { Name = "Los Angeles", TimeZone = "Pacific Standard Time" });
         }
     }
 }

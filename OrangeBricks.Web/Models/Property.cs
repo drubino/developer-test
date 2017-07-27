@@ -26,6 +26,10 @@ namespace OrangeBricks.Web.Models
 
         public bool IsListedForSale { get; set; }
 
+        [Required]
+        public int LocationId { get; set; }
+        public Location Location { get; set; }
+
         public ICollection<Offer> Offers { get; set; }
     }
 }
