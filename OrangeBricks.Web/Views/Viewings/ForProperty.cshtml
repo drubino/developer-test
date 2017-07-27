@@ -1,0 +1,21 @@
+﻿@model object
+
+@{
+    ViewBag.Title = "Booked Viewings for Your Property";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<p>Here you can see the viewings that you've booked for your property.</p>
+
+@if (false)
+{
+
+}
+else
+{
+    <div class="alert alert-info" role="alert">
+        This property has no viewings booked!
+    </div>
+}

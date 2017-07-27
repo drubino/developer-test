@@ -92,5 +92,18 @@ namespace OrangeBricks.Web.Controllers.Property
 
             return RedirectToAction("Index");
         }
+
+        [OrangeBricksAuthorize(Roles = "Buyer")]
+        public ActionResult ScheduleViewing(int id)
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [OrangeBricksAuthorize(Roles = "Buyer")]
+        public ActionResult ScheduleViewing(ScheduleViewingCommand command)
+        {
+            return RedirectToAction("Index");
+        }
     }
 }

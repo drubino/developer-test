@@ -170,6 +170,11 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Attributes\OrangeBricksAuthorizeAttribute.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\Property\Commands\ScheduleViewingCommand.cs" />
+    <Compile Include="Controllers\Viewings\Commands\AcknowledgeCancellationCommand.cs" />
+    <Compile Include="Controllers\Viewings\Commands\CancelViewingCommand.cs" />
+    <Compile Include="Controllers\Viewings\Commands\BookViewingCommand.cs" />
+    <Compile Include="Controllers\Viewings\ViewingsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\Offers\Builders\OffersOnPropertyViewModelBuilder.cs" />
     <Compile Include="Controllers\Offers\Commands\AcceptOfferCommand.cs" />
@@ -298,9 +303,14 @@
     <Content Include="Views\Offers\OnProperty.cshtml" />
     <None Include="Views\Account\UnAuthorized.cshtml" />
     <Content Include="Views\Offers\MyOffers.cshtml" />
+    <Content Include="Views\Property\ScheduleViewing.cshtml" />
+    <Content Include="Views\Viewings\ForProperty.cshtml" />
+    <Content Include="Views\Viewings\MyViewings.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Controllers\Viewings\Builders\" />
+    <Folder Include="Controllers\Viewings\ViewModels\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
