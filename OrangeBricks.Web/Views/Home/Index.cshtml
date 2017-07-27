@@ -18,37 +18,35 @@
         <p><a href="@Url.Action("MyProperties", "Property")" class="btn btn-primary btn-lg">View Your Properties &raquo;</a></p>
     }
 </div>
-
 <div class="row">
-    
-        <div class="col-md-4">
-            <h2>Sell</h2>
-            <p>
-                Sell your house in a few easy clicks. Add your listing and then simply review offers from buyers and accept or reject them.
-            </p>
-            @if (!Request.IsAuthenticated || User.IsInRole("Seller"))
-            {
-                <p><a class="btn btn-default" href="@Url.Action("Create", "Property")">List your property &raquo;</a></p>
-            }
-            else
-            {
-                <p><a class="btn btn-default disabled">List your property &raquo;</a></p>
-            }
-        </div>
-        <div class="col-md-4">
-            <h2>Buy</h2>
-            <p>View amazing properties for sale and send your offer directly to the seller. Saving time and money.</p>
-            @if (!Request.IsAuthenticated || User.IsInRole("Buyer"))
-            {
-                <p><a class="btn btn-default" href="@Url.Action("Index", "Property")">View properties &raquo;</a></p>
-            }
-            else
-            {
-                <p><a class="btn btn-default disabled">View properties &raquo;</a></p>
-            }
-        </div>
-        <div class="col-md-4">
-            <h2>Rent</h2>
-            <p>Coming soon...</p>
-        </div>
+    <div class="col-md-4">
+        <h2>Sell</h2>
+        <p>
+            Sell your house in a few easy clicks. Add your listing and then simply review offers from buyers and accept or reject them.
+        </p>
+        @if (!Request.IsAuthenticated || User.IsInRole("Seller"))
+        {
+            <p><a class="btn btn-default" href="@Url.Action("Create", "Property")">List your property &raquo;</a></p>
+        }
+        else
+        {
+            <p><a class="btn btn-default disabled">List your property &raquo;</a></p>
+        }
+    </div>
+    <div class="col-md-4">
+        <h2>Buy</h2>
+        <p>View amazing properties for sale and send your offer directly to the seller. Saving time and money.</p>
+        @if (!Request.IsAuthenticated || User.IsInRole("Buyer"))
+        {
+            <p><a class="btn btn-default" href="@Url.Action("Index", "Property")">View properties &raquo;</a></p>
+        }
+        else
+        {
+            <p><a class="btn btn-default disabled">View properties &raquo;</a></p>
+        }
+    </div>
+    <div class="col-md-4">
+        <h2>Rent</h2>
+        <p>Coming soon...</p>
+    </div>
 </div>
