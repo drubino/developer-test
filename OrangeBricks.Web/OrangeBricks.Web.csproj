@@ -170,7 +170,9 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Attributes\OrangeBricksAuthorizeAttribute.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\Property\Builders\ScheduleViewingViewModelBuilder.cs" />
     <Compile Include="Controllers\Property\Commands\ScheduleViewingCommand.cs" />
+    <Compile Include="Controllers\Property\ViewModels\ScheduleViewingViewModel.cs" />
     <Compile Include="Controllers\Viewings\Commands\AcknowledgeCancellationCommand.cs" />
     <Compile Include="Controllers\Viewings\Commands\CancelViewingCommand.cs" />
     <Compile Include="Controllers\Viewings\Commands\BookViewingCommand.cs" />
