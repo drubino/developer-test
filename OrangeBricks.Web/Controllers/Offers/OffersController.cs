@@ -7,6 +7,7 @@ using Microsoft.AspNet.Identity;
 
 namespace OrangeBricks.Web.Controllers.Offers
 {
+    [Authorize]
     public class OffersController : Controller
     {
         private readonly IOrangeBricksContext _context;

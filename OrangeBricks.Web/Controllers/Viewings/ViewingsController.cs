@@ -8,6 +8,7 @@ using OrangeBricks.Web.Controllers.Viewings.Commands;
 
 namespace OrangeBricks.Web.Controllers.Viewings
 {
+    [Authorize]
     public class ViewingsController : Controller
     {
         private readonly IOrangeBricksContext _context;
@@ -17,6 +18,7 @@ namespace OrangeBricks.Web.Controllers.Viewings
             _context = context;
         }
 
+        [OrangeBricksAuthorize(Roles = "Buyer")]
         public ActionResult MyViewings()
         {
             return View();

@@ -24,14 +24,17 @@
                     <li>@Html.ActionLink("About", "About", "Home")</li>
                     @if (Request.IsAuthenticated)
                     {
-                        <li>@Html.ActionLink("Properties", "Index", "Property")</li>
-                        if (User.IsInRole("Seller"))
+                        if (User.IsInRole("Buyer"))
+                        {
+                            <li>@Html.ActionLink("Properties", "Index", "Property")</li>
+                            <li>@Html.ActionLink("My Offers", "MyOffers", "Offers")</li>
+                            <li>@Html.ActionLink("My Viewings", "MyViewings", "Viewings")</li>
+                        }
+                        else if (User.IsInRole("Seller"))
                         {
                             <li>@Html.ActionLink("Create Listing", "Create", "Property")</li>
                             <li>@Html.ActionLink("My Properties", "MyProperties", "Property")</li>
                         }
-                        <li>@Html.ActionLink("My Offers", "MyOffers", "Offers")</li>
-                        <li>@Html.ActionLink("My Viewings", "MyViewings", "Viewings")</li>
                     }
                 </ul>
                 @Html.Partial("_LoginPartial")

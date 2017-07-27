@@ -19,7 +19,6 @@ namespace OrangeBricks.Web.Controllers.Property
             _context = context;
         }
 
-        [Authorize]
         public ActionResult Index(PropertiesQuery query)
         {
             var username = this.User.Identity.GetUserName();
@@ -29,6 +28,7 @@ namespace OrangeBricks.Web.Controllers.Property
             return View(viewModel);
         }
 
+        [Authorize]
         [OrangeBricksAuthorize(Roles = "Seller")]
         public ActionResult Create()
         {
@@ -41,8 +41,9 @@ namespace OrangeBricks.Web.Controllers.Property
             return View(viewModel);
         }
 
-        [OrangeBricksAuthorize(Roles = "Seller")]
         [HttpPost]
+        [Authorize]
+        [OrangeBricksAuthorize(Roles = "Seller")]
         public ActionResult Create(CreatePropertyCommand command)
         {
             var handler = new CreatePropertyCommandHandler(_context);
@@ -54,6 +55,7 @@ namespace OrangeBricks.Web.Controllers.Property
             return RedirectToAction("MyProperties");
         }
 
+        [Authorize]
         [OrangeBricksAuthorize(Roles = "Seller")]
         public ActionResult MyProperties()
         {
@@ -64,6 +66,7 @@ namespace OrangeBricks.Web.Controllers.Property
         }
 
         [HttpPost]
+        [Authorize]
         [OrangeBricksAuthorize(Roles = "Seller")]
         public ActionResult ListForSale(ListPropertyCommand command)
         {
@@ -74,6 +77,7 @@ namespace OrangeBricks.Web.Controllers.Property
             return RedirectToAction("MyProperties");
         }
 
+        [Authorize]
         [OrangeBricksAuthorize(Roles = "Buyer")]
         public ActionResult MakeOffer(int id)
         {
@@ -83,6 +87,7 @@ namespace OrangeBricks.Web.Controllers.Property
         }
 
         [HttpPost]
+        [Authorize]
         [OrangeBricksAuthorize(Roles = "Buyer")]
         public ActionResult MakeOffer(MakeOfferCommand command)
         {
@@ -93,6 +98,7 @@ namespace OrangeBricks.Web.Controllers.Property
             return RedirectToAction("Index");
         }
 
+        [Authorize]
         [OrangeBricksAuthorize(Roles = "Buyer")]
         public ActionResult ScheduleViewing(int id)
         {
@@ -100,6 +106,7 @@ namespace OrangeBricks.Web.Controllers.Property
         }
 
         [HttpPost]
+        [Authorize]
         [OrangeBricksAuthorize(Roles = "Buyer")]
         public ActionResult ScheduleViewing(ScheduleViewingCommand command)
         {
