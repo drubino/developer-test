@@ -32,11 +32,8 @@ namespace OrangeBricks.Web.Controllers.Property
         [OrangeBricksAuthorize(Roles = "Seller")]
         public ActionResult Create()
         {
-            var viewModel = new CreatePropertyViewModel();
-
-            viewModel.PossiblePropertyTypes = new string[] { "House", "Flat", "Bungalow" }
-                .Select(x => new SelectListItem { Value = x, Text = x })
-                .AsEnumerable();
+            var builder = new CreatePropertyViewModelBuilder(_context);
+            var viewModel = builder.Build();
 
             return View(viewModel);
         }
@@ -47,9 +44,7 @@ namespace OrangeBricks.Web.Controllers.Property
         public ActionResult Create(CreatePropertyCommand command)
         {
             var handler = new CreatePropertyCommandHandler(_context);
-
             command.SellerUserId = User.Identity.GetUserId();
-
             handler.Handle(command);
 
             return RedirectToAction("MyProperties");
@@ -59,8 +54,9 @@ namespace OrangeBricks.Web.Controllers.Property
         [OrangeBricksAuthorize(Roles = "Seller")]
         public ActionResult MyProperties()
         {
-            var builder = new MyPropertiesViewModelBuilder(_context);
-            var viewModel = builder.Build(User.Identity.GetUserId());
+            var username = User.Identity.GetUserId();
+            var builder = new MyPropertiesViewModelBuilder(username, _context);
+            var viewModel = builder.Build();
 
             return View(viewModel);
         }

@@ -9,29 +9,38 @@
 
 <p>Here is a list of your properties:</p>
 
-@foreach (var property in Model.Properties)
+@if (Model.Properties.Any())
 {
-    <hr />
-    <h3>@property.StreetName</h3>
-    <p>@property.NumberOfBedrooms bedroom @property.PropertyType</p>
-    <p>@property.Description</p>
-
-    <ul class="list-group">
-        <li class="list-group-item">
-            <a href="@Url.Action("OnProperty", "Offers", new {id = property.Id})">View offers that have been made on this property...</a>
-        </li>
-        <li class="list-group-item">
-            <a href="@Url.Action("ForProperty", "Viewings", new {id = property.Id})">View bookings that have been scheduled for this property...</a>
-        </li>
-    </ul>
-    
-    if (!property.IsListedForSale)
+    foreach (var property in Model.Properties)
     {
-        using (Html.BeginForm("ListForSale", "Property"))
+        <hr />
+        <h3>@property.StreetName</h3>
+        <p>@property.Location</p>
+        <p>@property.NumberOfBedrooms bedroom @property.PropertyType</p>
+        <p>@property.Description</p>
+
+        <ul class="list-group">
+            <li class="list-group-item">
+                <a href="@Url.Action("OnProperty", "Offers", new { id = property.Id })">View offers that have been made on this property...</a>
+            </li>
+            <li class="list-group-item">
+                <a href="@Url.Action("ForProperty", "Viewings", new { id = property.Id })">View bookings that have been scheduled for this property...</a>
+            </li>
+        </ul>
+
+        if (!property.IsListedForSale)
         {
+            using (Html.BeginForm("ListForSale", "Property"))
+            {
             @Html.Hidden("PropertyId", property.Id)
             <input class="btn btn-primary" type="submit" value="List Property For Sale" />
+            }
         }
     }
-
+}
+else
+{
+    <div class="alert alert-info" role="alert">
+        You haven't listed any properties yet!
+    </div>
 }

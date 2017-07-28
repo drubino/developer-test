@@ -22,7 +22,7 @@ namespace OrangeBricks.Web.Controllers.Property.Commands
         public void Handle(MakeOfferCommand command)
         {
             var property = _context.Properties
-                .Include("Offers")
+                .Include(x => x.Offers)
                 .FirstOrDefault(p => p.Id == command.PropertyId);
 
             var existingOffer = property.Offers.SingleOrDefault(o => o.Username == _username);

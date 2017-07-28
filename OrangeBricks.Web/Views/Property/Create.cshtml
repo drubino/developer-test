@@ -23,6 +23,12 @@
         </div>
     </div>
     <div class="form-group">
+        @Html.LabelFor(m => m.Location, "Location", new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.DropDownListFor(m => m.Location, Model.PossibleLocations, "Select a location", new { @class = "form-control" })
+        </div>
+    </div>
+    <div class="form-group">
         @Html.LabelFor(m => m.NumberOfBedrooms, new { @class = "col-md-2 control-label" })
         <div class="col-md-10">
             @Html.TextBoxFor(m => m.NumberOfBedrooms, new { @class = "form-control" })

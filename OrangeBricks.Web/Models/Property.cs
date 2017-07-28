@@ -16,6 +16,10 @@ namespace OrangeBricks.Web.Models
         public string StreetName { get; set; }
 
         [Required]
+        public int LocationId { get; set; }
+        public Location Location { get; set; }
+
+        [Required]
         public string Description { get; set; }
 
         [Required]
@@ -25,10 +29,6 @@ namespace OrangeBricks.Web.Models
         public string SellerUserId { get; set; }
 
         public bool IsListedForSale { get; set; }
-
-        [Required]
-        public int LocationId { get; set; }
-        public Location Location { get; set; }
 
         public ICollection<Offer> Offers { get; set; }
     }

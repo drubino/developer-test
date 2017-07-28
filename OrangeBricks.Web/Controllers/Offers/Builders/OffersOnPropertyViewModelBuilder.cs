@@ -18,8 +18,9 @@ namespace OrangeBricks.Web.Controllers.Offers.Builders
         public OffersOnPropertyViewModel Build(int id)
         {
             var property = _context.Properties
-                .Where(p => p.Id == id)
                 .Include(x => x.Offers)
+                .Include(x => x.Location)
+                .Where(p => p.Id == id)
                 .SingleOrDefault();
 
             var offers = property.Offers ?? new List<Offer>();
@@ -37,6 +38,7 @@ namespace OrangeBricks.Web.Controllers.Offers.Builders
                 PropertyId = property.Id, 
                 PropertyType = property.PropertyType,
                 StreetName = property.StreetName,
+                Location = property.Location.Name,
                 Description = property.Description,
                 NumberOfBedrooms = property.NumberOfBedrooms
             };

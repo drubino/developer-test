@@ -21,6 +21,11 @@ namespace OrangeBricks.Web.Controllers.Property.ViewModels
         [Display(Name = "Number of bedrooms")]
         public int NumberOfBedrooms { get; set; }
 
+        [Required]
+        [Display(Name = "Location")]
+        public int Location { get; set; }
+
         public IEnumerable<SelectListItem> PossiblePropertyTypes { get; set; }
+        public IEnumerable<SelectListItem> PossibleLocations { get; set; }
     }
 }

@@ -17,6 +17,7 @@ namespace OrangeBricks.Web.Controllers.Property.Commands
             {
                PropertyType = command.PropertyType,
                StreetName = command.StreetName,
+               LocationId = command.Location,
                Description = command.Description,
                NumberOfBedrooms = command.NumberOfBedrooms
             };

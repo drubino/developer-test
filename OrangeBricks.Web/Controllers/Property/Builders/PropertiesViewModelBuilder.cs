@@ -4,6 +4,7 @@ using System.Linq;
 using OrangeBricks.Web.Controllers.Property.ViewModels;
 using OrangeBricks.Web.Models;
 using System.Security.Principal;
+using System.Data.Entity;
 
 namespace OrangeBricks.Web.Controllers.Property.Builders
 {
@@ -25,6 +26,7 @@ namespace OrangeBricks.Web.Controllers.Property.Builders
                 .Select(p => new
                 {
                     Property = p,
+                    Location = p.Location,
                     Offer = p.Offers.FirstOrDefault(o => o.Username == _username)
                 })
                 .ToList();
@@ -39,17 +41,18 @@ namespace OrangeBricks.Web.Controllers.Property.Builders
 
             return new PropertiesViewModel
             {
-                Properties = properties.Select(p => MapViewModel(p.Property, p.Offer)).ToList(),
+                Properties = properties.Select(p => MapViewModel(p.Property, p.Offer, p.Location)).ToList(),
                 Search = query.Search
             };
         }
 
-        private static PropertyViewModel MapViewModel(Models.Property property, Offer offer)
+        private static PropertyViewModel MapViewModel(Models.Property property, Offer offer, Location location)
         {
             return new PropertyViewModel
             {
                 Id = property.Id,
                 StreetName = property.StreetName,
+                Location = location.Name,
                 Description = property.Description,
                 NumberOfBedrooms = property.NumberOfBedrooms,
                 PropertyType = property.PropertyType,
