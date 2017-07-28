@@ -175,6 +175,7 @@
     <Compile Include="Controllers\Offers\Commands\RemoveOfferCommand.cs" />
     <Compile Include="Controllers\Property\Builders\CreatePropertyViewModelBuilder.cs" />
     <Compile Include="Controllers\Property\Builders\ScheduleViewingViewModelBuilder.cs" />
+    <Compile Include="Controllers\Property\Commands\ScheduleViewingCommandHandler.cs" />
     <Compile Include="Controllers\Property\Commands\ScheduleViewingCommand.cs" />
     <Compile Include="Controllers\Property\ViewModels\ScheduleViewingViewModel.cs" />
     <Compile Include="Controllers\Viewings\Commands\RemoveViewingCommand.cs" />

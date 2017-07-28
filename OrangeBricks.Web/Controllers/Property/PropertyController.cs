@@ -7,6 +7,7 @@ using OrangeBricks.Web.Controllers.Property.Builders;
 using OrangeBricks.Web.Controllers.Property.Commands;
 using OrangeBricks.Web.Controllers.Property.ViewModels;
 using OrangeBricks.Web.Models;
+using System;
 
 namespace OrangeBricks.Web.Controllers.Property
 {
@@ -108,6 +109,10 @@ namespace OrangeBricks.Web.Controllers.Property
         [OrangeBricksAuthorize(Roles = "Buyer")]
         public ActionResult ScheduleViewing(ScheduleViewingCommand command)
         {
+            var username = this.User.Identity.GetUserName();
+            var handler = new ScheduleViewingCommandHandler(username, _context);
+            handler.Handle(command);
+            
             return RedirectToAction("Index");
         }
     }
