@@ -30,6 +30,14 @@
                     <div class="alert @offer.StatusClass">
                         <strong>@offer.Status</strong>
                     </div>
+                    @using (Html.BeginForm("Remove", "Offers"))
+                    {
+                        @Html.Hidden("PropertyId", offerOnProperty.PropertyId)
+                        @Html.Hidden("OfferId", offer.Id)
+                        <p>
+                            <input type="submit" class="btn btn-default" value="Remove" />
+                        </p>
+                    }
                 </p>
             </div>
         </div>

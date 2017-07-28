@@ -40,7 +40,6 @@ namespace OrangeBricks.Web.Controllers.Offers
         public ActionResult Accept(AcceptOfferCommand command)
         {
             var handler = new AcceptOfferCommandHandler(_context);
-
             handler.Handle(command);
 
             return RedirectToAction("OnProperty", new { id = command.PropertyId });
@@ -51,10 +50,19 @@ namespace OrangeBricks.Web.Controllers.Offers
         public ActionResult Reject(RejectOfferCommand command)
         {
             var handler = new RejectOfferCommandHandler(_context);
-
             handler.Handle(command);
 
             return RedirectToAction("OnProperty", new { id = command.PropertyId });
+        }
+
+        [HttpPost]
+        [OrangeBricksAuthorize(Roles = "Buyer")]
+        public ActionResult Remove(RemoveOfferCommand command)
+        {
+            var handler = new RemoveOfferCommandHandler(_context);
+            handler.Handle(command);
+
+            return RedirectToAction("MyOffers", new { id = command.PropertyId });
         }
     }
 }

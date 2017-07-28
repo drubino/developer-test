@@ -19,9 +19,9 @@ namespace OrangeBricks.Web.Controllers.Offers.Builders
         public MyOffersViewModel Build()
         {
             var offers = _context.Offers
-                .Include(x => x.Property)
-                .Include(x => x.Property.Location)
-                .Where(x => x.Status != OfferStatus.Removed)
+                .Include(o => o.Property)
+                .Include(o => o.Property.Location)
+                .Where(o => o.Status != OfferStatus.Removed)
                 .Where(o => o.Username == _username)
                 .ToList();
 

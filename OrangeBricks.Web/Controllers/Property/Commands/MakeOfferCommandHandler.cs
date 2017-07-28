@@ -25,10 +25,12 @@ namespace OrangeBricks.Web.Controllers.Property.Commands
                 .Include(x => x.Offers)
                 .FirstOrDefault(p => p.Id == command.PropertyId);
 
-            var existingOffer = property.Offers.SingleOrDefault(o => o.Username == _username);
+            var existingOffer = property.Offers
+                .Where(o => o.Status != OfferStatus.Removed)
+                .SingleOrDefault(o => o.Username == _username);
+
             if (existingOffer != null)
-                throw new InvalidOperationException(
-                    string.Format("{0} has already made an offer on property {1}", _username, property.Id));
+                throw new InvalidOperationException("The user already has an active offer on the property");
 
             var offer = new Offer
             {
