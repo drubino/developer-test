@@ -1,4 +1,4 @@
-﻿@model object
+﻿@model OrangeBricks.Web.Controllers.Property.ViewModels.ScheduleViewingViewModel
 @{
     ViewBag.Title = "Schedule Viewing";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -6,11 +6,59 @@
 
 <h2>Schedule Viewing</h2>
 
+<p>When would you like to visit the @Model.PropertyType in @Model.PropertyLocation?</p>
+<hr />
+
+
 @using (Html.BeginForm("ScheduleViewing", "Property", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
 {
+    <div class="form-group">
+        @Html.LabelFor(m => m.ViewingDate, "Date", new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.Hidden("PropertyId", Model.PropertyId)
+            @Html.TextBoxFor(m => m.ViewingDate, new { @class = "form-control viewing-date" })
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <div id="date-picker"></div>
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.ViewingTime, "Time", new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            <div class="input-group">
+                @Html.TextBoxFor(m => m.ViewingTime, new { @class = "form-control viewing-time" })
+                <span class="input-group-addon">@Model.PropertyTimeAbbreviation</span>
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <div id="time-picker"></div>
+        </div>
+    </div>
     <div class="form-group">
         <div class="col-md-offset-2 col-md-10">
             <input type="submit" class="btn btn-default" value="Schedule Viewing" />
         </div>
     </div>
+    <hr />
+    <p><i>*** Viewing times in @Model.PropertyLocation are scheduled in @Model.PropertyTimeZone</i></p>
+}
+
+@section Scripts {
+    <script>
+        $(function () {
+            $("#date-picker").datepicker({
+                altField: ".viewing-date",
+                altFormat: "DD MM d, yy"
+            });
+            $('.viewing-time').wickedpicker({
+                title: 'Please select a time',
+                minutesInterval: 15,
+                now: new Date().getHours() + ":00"
+            }); 
+        });
+    </script>
 }

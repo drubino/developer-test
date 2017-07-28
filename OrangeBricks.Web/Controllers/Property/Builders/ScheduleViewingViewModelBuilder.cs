@@ -21,11 +21,16 @@ namespace OrangeBricks.Web.Controllers.Property.Builders
                 .Include(p => p.Location)
                 .FirstOrDefault(p => p.Id == id);
 
+            var timeZone = property.Location.TimeZone;
+            var timeZoneAbbreviation = string.Join("", timeZone.Split(' ').Select(s => s.Substring(0, 1))).ToUpper();
+
             return new ScheduleViewingViewModel
             {
                 PropertyId = property.Id,
-                PropertyTimeZone = property.Location.TimeZone,
-                ViewingDate = DateTime.Now,
+                PropertyType = property.PropertyType,
+                PropertyLocation = property.Location.Name,
+                PropertyTimeZone = timeZone,
+                PropertyTimeAbbreviation = timeZoneAbbreviation
             };
         }
     }

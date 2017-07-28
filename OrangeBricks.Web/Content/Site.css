@@ -19,6 +19,27 @@
 /* Set width on the form input elements since they're 100% wide by default */
 input,
 select,
-textarea {
+textarea,
+.input-group {
     max-width: 280px;
+}
+
+/* Configure the jquery ui date picker for forms */
+.ui-datepicker {
+    font-size: 16.5px;
+    height: 275px;
+}
+
+/* Configure the jquery time picker for forms */
+.wickedpicker {
+    display: block;
+    position: inherit!important;
+    margin: 0;
+    width: 280px; 
+    box-shadow: none;
+    border: 1px solid #c5c5c5;
+    border-radius: 3px;
+}
+.wickedpicker__close {
+    display: none;
 }
