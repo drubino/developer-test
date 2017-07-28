@@ -98,7 +98,9 @@ namespace OrangeBricks.Web.Controllers.Property
         [OrangeBricksAuthorize(Roles = "Buyer")]
         public ActionResult ScheduleViewing(int id)
         {
-            return View();
+            var builder = new ScheduleViewingViewModelBuilder(_context);
+            var viewModel = builder.Build(id);
+            return View(viewModel);
         }
 
         [HttpPost]
