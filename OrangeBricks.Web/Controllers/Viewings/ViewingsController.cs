@@ -46,7 +46,7 @@ namespace OrangeBricks.Web.Controllers.Viewings
 
         [HttpPost]
         [OrangeBricksAuthorize(Roles = "Buyer")]
-        public ActionResult AcknowledgeCancellation(AcknowledgeCancellationCommand command)
+        public ActionResult Remove(RemoveViewingCommand command)
         {
             return RedirectToAction("MyViewings");
         }

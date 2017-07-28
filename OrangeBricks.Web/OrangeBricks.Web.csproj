@@ -30,6 +30,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <LangVersion>6</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -176,7 +177,7 @@
     <Compile Include="Controllers\Property\Builders\ScheduleViewingViewModelBuilder.cs" />
     <Compile Include="Controllers\Property\Commands\ScheduleViewingCommand.cs" />
     <Compile Include="Controllers\Property\ViewModels\ScheduleViewingViewModel.cs" />
-    <Compile Include="Controllers\Viewings\Commands\AcknowledgeCancellationCommand.cs" />
+    <Compile Include="Controllers\Viewings\Commands\RemoveViewingCommand.cs" />
     <Compile Include="Controllers\Viewings\Commands\CancelViewingCommand.cs" />
     <Compile Include="Controllers\Viewings\Commands\BookViewingCommand.cs" />
     <Compile Include="Controllers\Viewings\ViewingsController.cs" />
