@@ -21,9 +21,12 @@
 
         if (property.HasOffers)
         {
-            <a class="btn btn-default" href="@Url.Action("OnProperty", "Offers", new { id = property.Id })">View offers</a>
+            <a class="btn btn-default" href="@Url.Action("OnProperty", "Offers", new { id = property.Id })">Check offers</a>
         }
-        <a class="btn btn-default" href="@Url.Action("ForProperty", "Viewings", new { id = property.Id })">View bookings</a>
+        if (property.HasViewings)
+        {
+            <a class="btn btn-default" href="@Url.Action("ForProperty", "Viewings", new { id = property.Id })">Check viewings</a>
+        }
 
         if (!property.IsListedForSale)
         {

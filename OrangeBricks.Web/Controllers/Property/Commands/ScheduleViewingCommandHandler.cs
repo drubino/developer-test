@@ -23,7 +23,22 @@ namespace OrangeBricks.Web.Controllers.Property.Commands
         {
             var property = _context.Properties
                 .Include(x => x.Offers)
+                .Include(x => x.Viewings)
                 .FirstOrDefault(p => p.Id == command.PropertyId);
+
+            var hasOffers = property.Offers
+                .Where(o => o.Status != OfferStatus.Removed)
+                .Any();
+
+            if (hasOffers)
+                throw new InvalidOperationException("The user already has already made an offer on the property");
+
+            var existingViewing = property.Viewings
+                .Where(o => o.Status != ViewingStatus.Removed)
+                .SingleOrDefault(o => o.Username == _username);
+
+            if (existingViewing != null)
+                throw new InvalidOperationException("The user already has an active viewing on the property");
 
             var viewingDate =
                 DateTime.Parse(command.ViewingDate).Date +

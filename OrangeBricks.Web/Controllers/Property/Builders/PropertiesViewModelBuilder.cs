@@ -29,6 +29,9 @@ namespace OrangeBricks.Web.Controllers.Property.Builders
                     Location = p.Location,
                     OfferCount = p.Offers
                         .Where(o => o.Status != OfferStatus.Removed)
+                        .Count(),
+                    ViewingCount = p.Viewings
+                        .Where(o => o.Status != ViewingStatus.Removed)
                         .Count()
                 })
                 .ToList();
@@ -43,12 +46,12 @@ namespace OrangeBricks.Web.Controllers.Property.Builders
 
             return new PropertiesViewModel
             {
-                Properties = properties.Select(p => MapViewModel(p.Property, p.Location, p.OfferCount)).ToList(),
+                Properties = properties.Select(p => MapViewModel(p.Property, p.Location, p.OfferCount, p.ViewingCount)).ToList(),
                 Search = query.Search
             };
         }
 
-        private static PropertyViewModel MapViewModel(Models.Property property, Location location, int offerCount)
+        private static PropertyViewModel MapViewModel(Models.Property property, Location location, int offerCount, int viewingCount)
         {
             return new PropertyViewModel
             {
@@ -58,7 +61,8 @@ namespace OrangeBricks.Web.Controllers.Property.Builders
                 Description = property.Description,
                 NumberOfBedrooms = property.NumberOfBedrooms,
                 PropertyType = property.PropertyType,
-                OfferCount = offerCount
+                OfferCount = offerCount,
+                ViewingCount = viewingCount
             };
         }
     }

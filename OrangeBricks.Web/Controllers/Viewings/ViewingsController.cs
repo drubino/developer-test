@@ -5,6 +5,7 @@ using Microsoft.AspNet.Identity;
 using OrangeBricks.Web.Models;
 using OrangeBricks.Web.Attributes;
 using OrangeBricks.Web.Controllers.Viewings.Commands;
+using OrangeBricks.Web.Controllers.Viewings.Builders;
 
 namespace OrangeBricks.Web.Controllers.Viewings
 {
@@ -21,19 +22,29 @@ namespace OrangeBricks.Web.Controllers.Viewings
         [OrangeBricksAuthorize(Roles = "Buyer")]
         public ActionResult MyViewings()
         {
-            return View();
+            var username = this.User.Identity.GetUserName();
+            var builder = new MyViewingsViewModelBuilder(username, _context);
+            var viewModel = builder.Build();
+
+            return View(viewModel);
         }
 
         [OrangeBricksAuthorize(Roles = "Seller")]
         public ActionResult ForProperty(int id)
         {
-            return View();
+            var builder = new ViewingsForPropertyViewModelBuilder(_context);
+            var viewModel = builder.Build(id);
+
+            return View(viewModel);
         }
 
         [HttpPost]
         [OrangeBricksAuthorize(Roles = "Seller")]
         public ActionResult Book(BookViewingCommand command)
         {
+            var handler = new BookViewingCommandHandler(_context);
+            handler.Handle(command);
+
             return RedirectToAction("ForProperty", new { id = command.PropertyId });
         }
 
@@ -41,6 +52,9 @@ namespace OrangeBricks.Web.Controllers.Viewings
         [OrangeBricksAuthorize(Roles = "Seller")]
         public ActionResult Cancel(CancelViewingCommand command)
         {
+            var handler = new CancelViewingCommandHandler(_context);
+            handler.Handle(command);
+
             return RedirectToAction("ForProperty", new { id = command.PropertyId });
         }
 
@@ -48,6 +62,9 @@ namespace OrangeBricks.Web.Controllers.Viewings
         [OrangeBricksAuthorize(Roles = "Buyer")]
         public ActionResult Remove(RemoveViewingCommand command)
         {
+            var handler = new RemoveViewingCommandHandler(_context);
+            handler.Handle(command);
+
             return RedirectToAction("MyViewings");
         }
     }

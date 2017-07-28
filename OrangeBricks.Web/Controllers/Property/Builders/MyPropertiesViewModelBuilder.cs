@@ -33,7 +33,10 @@ namespace OrangeBricks.Web.Controllers.Property.Builders
                         PropertyType = p.PropertyType,
                         IsListedForSale = p.IsListedForSale,
                         OfferCount = p.Offers
-                            .Where(o => o.Status != OfferStatus.Removed)
+                            .Where(o => o.Status != OfferStatus.Removed && o.Status != OfferStatus.Rejected)
+                            .Count(),
+                        ViewingCount = p.Viewings
+                            .Where(o => o.Status != ViewingStatus.Removed && o.Status != ViewingStatus.Cancelled)
                             .Count()
                     })
                     .ToList()

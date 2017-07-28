@@ -1,7 +1,7 @@
-﻿@model object
+﻿@model OrangeBricks.Web.Controllers.Viewings.ViewModels.ViewingsForPropertyViewModel
 
 @{
-    ViewBag.Title = "Booked Viewings for Your Property";
+    ViewBag.Title = "Scheduled Viewings for Your Property";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -9,9 +9,40 @@
 
 <p>Here you can see the viewings that you've booked for your property.</p>
 
-@if (false)
+@if (Model.HasViewings)
 {
+    <p>There are @Model.Viewings.Count() viewings scheduled for this property...</p>
 
+    foreach (var viewing in Model.Viewings)
+    {
+        <hr />
+        <div>
+            <p><strong>Schedule Date: </strong> @viewing.ViewingDate</p>
+            <p><strong>Scheduled Time: </strong> @viewing.ViewingTime</p>
+            <p><strong>Status: </strong> @viewing.Status</p>
+        </div>
+
+        if (viewing.IsSchedule)
+        {
+            using (Html.BeginForm("Book", "Viewings"))
+            {
+                @Html.Hidden("PropertyId", Model.PropertyId)
+                @Html.Hidden("ViewingId", viewing.Id)
+                <p>
+                    <input type="submit" class="btn btn-default" value="Book Viewing" />
+                </p>
+            }
+            using (Html.BeginForm("Cancel", "Viewings"))
+            {
+                @Html.Hidden("PropertyId", Model.PropertyId)
+                @Html.Hidden("ViewingId", viewing.Id)
+                <p>
+                    <input type="submit" class="btn btn-default" value="Cancel Viewing" />
+                </p>
+            }
+        }
+
+    }
 }
 else
 {

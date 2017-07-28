@@ -31,19 +31,32 @@
     <p>@property.NumberOfBedrooms bedroom @property.PropertyType</p>
     <p>@property.Description</p>
 
-    if (property.HasOffers)
+    if (User.IsInRole("Buyer"))
     {
-        <a href="@Url.Action("MyOffers", "Offers")#property-@property.Id" class="btn btn-default">
-            View Offer
-        </a>
-    }
-    else
-    {
-        <a href="@Url.Action("MakeOffer", "Property", new { id = property.Id })" class="btn btn-primary">
-            Make Offer
-        </a>
-        <a href="@Url.Action("ScheduleViewing", "Property", new { id = property.Id })" class="btn btn-primary">
-            Schedule Viewing
-        </a>
+        if (!property.HasOffers && property.HasViewings)
+        {
+            <a href="@Url.Action("MyViewings", "Viewings")#property-@property.Id" class="btn btn-default">
+                Check Viewing Status
+            </a>
+        }
+        else if (!property.HasOffers && !property.HasViewings)
+        {
+            <a href="@Url.Action("ScheduleViewing", "Property", new { id = property.Id })" class="btn btn-primary">
+                Schedule Viewing
+            </a>
+        }
+        if (property.HasOffers)
+        {
+            <a href="@Url.Action("MyOffers", "Offers")#property-@property.Id" class="btn btn-default">
+                Check Offer Status
+            </a>
+        }
+        else
+        {
+            <a href="@Url.Action("MakeOffer", "Property", new { id = property.Id })" class="btn btn-primary">
+                Make Offer
+            </a>
+
+        }
     }
 }

@@ -178,6 +178,11 @@
     <Compile Include="Controllers\Property\Commands\ScheduleViewingCommandHandler.cs" />
     <Compile Include="Controllers\Property\Commands\ScheduleViewingCommand.cs" />
     <Compile Include="Controllers\Property\ViewModels\ScheduleViewingViewModel.cs" />
+    <Compile Include="Controllers\Viewings\Builders\MyViewingsViewModelBuilder.cs" />
+    <Compile Include="Controllers\Viewings\Builders\ViewingsForPropertyViewModelBuilder.cs" />
+    <Compile Include="Controllers\Viewings\Commands\BookViewingCommandHandler.cs" />
+    <Compile Include="Controllers\Viewings\Commands\CancelViewingCommandHandler.cs" />
+    <Compile Include="Controllers\Viewings\Commands\RemoveViewingCommandHandler.cs" />
     <Compile Include="Controllers\Viewings\Commands\RemoveViewingCommand.cs" />
     <Compile Include="Controllers\Viewings\Commands\CancelViewingCommand.cs" />
     <Compile Include="Controllers\Viewings\Commands\BookViewingCommand.cs" />
@@ -209,6 +214,9 @@
     <Compile Include="Controllers\Property\ViewModels\MyPropertiesViewModel.cs" />
     <Compile Include="Controllers\Property\ViewModels\PropertiesViewModel.cs" />
     <Compile Include="Controllers\Property\ViewModels\PropertyViewModel.cs" />
+    <Compile Include="Controllers\Viewings\ViewModels\MyViewingsViewModel.cs" />
+    <Compile Include="Controllers\Viewings\ViewModels\ViewingViewModel.cs" />
+    <Compile Include="Controllers\Viewings\ViewModels\ViewingsForPropertyViewModel.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -385,8 +393,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Controllers\Viewings\Builders\" />
-    <Folder Include="Controllers\Viewings\ViewModels\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

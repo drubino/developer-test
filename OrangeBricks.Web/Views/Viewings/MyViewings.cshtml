@@ -1,4 +1,5 @@
-﻿@model object
+﻿@using OrangeBricks.Web.Models
+@model OrangeBricks.Web.Controllers.Viewings.ViewModels.MyViewingsViewModel
 
 @{
     ViewBag.Title = "My Viewings";
@@ -9,9 +10,42 @@
 
 <p>Here is a list of your scheduled viewings:</p>
 
-@if (false)
+@if (Model.ViewingsForProperty.Any())
 {
+    foreach (var viewingForProperty in Model.ViewingsForProperty)
+    {
+        var viewing = viewingForProperty.Viewings.Single();
 
+        <hr />
+        <div id="property-@viewingForProperty.PropertyId">
+            <h3>@viewingForProperty.StreetName</h3>
+            <p>@viewingForProperty.Location</p>
+            <p>@viewingForProperty.NumberOfBedrooms bedroom @viewingForProperty.PropertyType</p>
+            <p>@viewingForProperty.Description</p>
+            <br />
+            <div>
+                <p><strong>Schedule Date: </strong> @viewing.ViewingDate</p>
+                <p><strong>Scheduled Time: </strong> @viewing.ViewingTime</p>
+                <p>
+                    <strong>Status: </strong>
+                    <div class="alert @viewing.StatusClass">
+                        <strong>@viewing.Status</strong>
+                    </div>
+                    @if (viewing.Status == ViewingStatus.Removed || viewing.Status == ViewingStatus.Scheduled)
+                    {
+                        using (Html.BeginForm("Remove", "Viewings"))
+                        {
+                            @Html.Hidden("PropertyId", viewingForProperty.PropertyId)
+                            @Html.Hidden("ViewingId", viewing.Id)
+                        <p>
+                            <input type="submit" class="btn btn-default" value="Remove" />
+                        </p>
+                        }
+                    }
+                    </p>
+                </div>
+            </div>
+    }
 }
 else
 {
