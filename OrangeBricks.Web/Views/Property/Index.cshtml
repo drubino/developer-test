@@ -31,9 +31,9 @@
     <p>@property.NumberOfBedrooms bedroom @property.PropertyType</p>
     <p>@property.Description</p>
 
-    if (property.HasOffer)
+    if (property.HasOffers)
     {
-        <a href="@Url.Action("MyOffers", "Offers")#offer-@property.Offer.Id" class="btn btn-default">
+        <a href="@Url.Action("MyOffers", "Offers")#property-@property.Id" class="btn btn-default">
             View Offer
         </a>
     }

@@ -28,13 +28,15 @@ namespace OrangeBricks.Web.Controllers.Offers.Builders
             return new OffersOnPropertyViewModel
             {
                 HasOffers = offers.Any(),
-                Offers = offers.Select(x => new OfferViewModel
-                {
-                    Id = x.Id,
-                    Amount = x.Amount,
-                    CreatedAt = x.CreatedAt,
-                    Status = x.Status
-                }),
+                Offers = offers
+                    .Where(o => o.Status == OfferStatus.Pending || o.Status == OfferStatus.Accepted)
+                    .Select(x => new OfferViewModel
+                    {
+                        Id = x.Id,
+                        Amount = x.Amount,
+                        CreatedAt = x.CreatedAt,
+                        Status = x.Status
+                    }),
                 PropertyId = property.Id, 
                 PropertyType = property.PropertyType,
                 StreetName = property.StreetName,

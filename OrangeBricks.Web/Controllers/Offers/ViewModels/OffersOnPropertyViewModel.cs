@@ -5,6 +5,7 @@ namespace OrangeBricks.Web.Controllers.Offers.ViewModels
 {
     public class OffersOnPropertyViewModel
     {
+        public int PropertyId { get; set; }
         public string PropertyType { get; set; }
         public int NumberOfBedrooms{ get; set; }
         public string StreetName { get; set; }
@@ -12,6 +13,5 @@ namespace OrangeBricks.Web.Controllers.Offers.ViewModels
         public string Description { get; set; }
         public bool HasOffers { get; set; }
         public IEnumerable<OfferViewModel> Offers { get; set; }
-        public int PropertyId { get; set; }
     }
 }

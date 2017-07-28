@@ -44,7 +44,7 @@ namespace OrangeBricks.Web.Controllers.Property
         public ActionResult Create(CreatePropertyCommand command)
         {
             var handler = new CreatePropertyCommandHandler(_context);
-            command.SellerUserId = User.Identity.GetUserId();
+            command.SellerUserId = User.Identity.GetUserName();
             handler.Handle(command);
 
             return RedirectToAction("MyProperties");

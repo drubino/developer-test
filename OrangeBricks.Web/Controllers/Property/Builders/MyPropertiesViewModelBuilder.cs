@@ -7,12 +7,12 @@ namespace OrangeBricks.Web.Controllers.Property.Builders
 {
     public class MyPropertiesViewModelBuilder
     {
-        private readonly string _username;
+        private readonly string _userId;
         private readonly IOrangeBricksContext _context;
 
-        public MyPropertiesViewModelBuilder(string username, IOrangeBricksContext context)
+        public MyPropertiesViewModelBuilder(string userId, IOrangeBricksContext context)
         {
-            _username = username;
+            _userId = userId;
             _context = context;
         }
 
@@ -22,7 +22,7 @@ namespace OrangeBricks.Web.Controllers.Property.Builders
             {
                 Properties = _context.Properties
                     .Include(p => p.Location)
-                    .Where(p => p.SellerUserId == _username)
+                    .Where(p => p.SellerUserId == _userId)
                     .Select(p => new PropertyViewModel
                     {
                         Id = p.Id,
@@ -31,7 +31,10 @@ namespace OrangeBricks.Web.Controllers.Property.Builders
                         Description = p.Description,
                         NumberOfBedrooms = p.NumberOfBedrooms,
                         PropertyType = p.PropertyType,
-                        IsListedForSale = p.IsListedForSale
+                        IsListedForSale = p.IsListedForSale,
+                        OfferCount = p.Offers
+                            .Where(o => o.Status != OfferStatus.Removed)
+                            .Count()
                     })
                     .ToList()
             };

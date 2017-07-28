@@ -11,7 +11,7 @@ namespace OrangeBricks.Web.Controllers.Property.ViewModels
         public string PropertyType { get; set; }
         public int Id { get; set; }
         public bool IsListedForSale { get; set; }
-        public Offer Offer { get; set; }
-        public bool HasOffer => this.Offer != null;
+        public int OfferCount { get; set; }
+        public bool HasOffers => this.OfferCount > 0;
     }
 }
