@@ -21,6 +21,7 @@ namespace OrangeBricks.Web.Controllers.Offers.Builders
             var offers = _context.Offers
                 .Include(x => x.Property)
                 .Include(x => x.Property.Location)
+                .Where(x => x.Status != OfferStatus.Removed)
                 .Where(o => o.Username == _username)
                 .ToList();
 

@@ -27,7 +27,10 @@ namespace OrangeBricks.Web.Controllers.Property.Builders
                 {
                     Property = p,
                     Location = p.Location,
-                    Offer = p.Offers.FirstOrDefault(o => o.Username == _username)
+                    Offer = p.Offers
+                        .Where(o => o.Status != OfferStatus.Removed)
+                        .OrderByDescending(o => o.UpdatedAt)
+                        .FirstOrDefault(o => o.Username == _username)
                 })
                 .ToList();
 
