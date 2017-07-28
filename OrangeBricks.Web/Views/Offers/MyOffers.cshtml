@@ -31,7 +31,7 @@
                     <div class="alert @offer.StatusClass">
                         <strong>@offer.Status</strong>
                     </div>
-                    @if (offer.Status == OfferStatus.Removed)
+                    @if (offer.Status == OfferStatus.Removed || offer.Status == OfferStatus.Pending)
                     {
                         using (Html.BeginForm("Remove", "Offers"))
                         {
