@@ -25,7 +25,7 @@ namespace OrangeBricks.Web.Controllers.Property.Builders
                     .Select(x => new SelectListItem { Value = x, Text = x })
                     .AsEnumerable(),
                 PossibleLocations = locations
-                    .Select(l => new SelectListItem { Value = l.Id.ToString(), Text = l.Name })
+                    .Select(l => new SelectListItem { Value = l.Name, Text = l.Name })
                     .ToList()
             };
 

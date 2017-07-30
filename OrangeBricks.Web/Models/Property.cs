@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace OrangeBricks.Web.Models
 {
@@ -16,7 +17,9 @@ namespace OrangeBricks.Web.Models
         public string StreetName { get; set; }
 
         [Required]
-        public int LocationId { get; set; }
+        public string LocationName { get; set; }
+
+        [ForeignKey(nameof(LocationName))]
         public Location Location { get; set; }
 
         [Required]
