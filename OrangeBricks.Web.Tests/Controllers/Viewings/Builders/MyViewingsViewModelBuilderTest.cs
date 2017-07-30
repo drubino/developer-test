@@ -1,6 +1,6 @@
 ﻿using NSubstitute;
 using NUnit.Framework;
-using OrangeBricks.Web.Controllers.Offers.Builders;
+using OrangeBricks.Web.Controllers.Viewings.Builders;
 using OrangeBricks.Web.Models;
 using System;
 using System.Collections.Generic;
@@ -9,7 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace OrangeBricks.Web.Tests.Controllers.Offers.Builders
+namespace OrangeBricks.Web.Tests.Controllers.Viewings.Builders
 {
     public static class ExtentionMethods
     {
@@ -35,32 +35,37 @@ namespace OrangeBricks.Web.Tests.Controllers.Offers.Builders
         }
 
         [Test]
-        public void BuildShouldReturnOffersForTheCurrentUser()
+        public void BuildShouldReturnViewingsForTheCurrentUser()
         {
             var username = "user";
-            var builder = new MyOffersViewModelBuilder(username, _context);
+            var builder = new MyViewingsViewModelBuilder(username, _context);
 
-            var location = new Location { Name = "", TimeZone = "" };
+            var location = new Location { Name = "Test", TimeZone = "Test" };
             var properties = new List<Models.Property>{
-                new Models.Property{ Id = 0, StreetName = "Smith Street", Location = location,  Description = "", IsListedForSale = true },
+                new Models.Property{ Id = 0, StreetName = "Smith Street", Location = location, Description = "", IsListedForSale = true },
                 new Models.Property{ Id = 1, StreetName = "Jones Street", Location = location, Description = "", IsListedForSale = true }
             };
 
-            var offers = new List<Offer>
+            var returnedProperty = properties[0];
+            var viewings = new List<Viewing>
             {
-                new Offer { Username = "", Property = properties[0] },
-                new Offer { Username = username, Property = properties[0] }, //Should be returned
-                new Offer { Username = "", Property = properties[1] },
+                new Viewing { Username = "", Property = properties[1] },
+                new Viewing { Username = username, Property = returnedProperty }, //Should be returned
+                new Viewing { Username = "", Property = properties[1] },
             };
 
             var offersMockSet = Substitute.For<IDbSet<Offer>>()
-                .Initialize(offers.AsQueryable());
+                .Initialize(new Offer[0].AsQueryable());
+
+            var viewingsMockSet = Substitute.For<IDbSet<Viewing>>()
+                .Initialize(viewings.AsQueryable());
 
             _context.Offers.Returns(offersMockSet);
+            _context.Viewings.Returns(viewingsMockSet);
 
             var viewModel = builder.Build();
-            Assert.That(viewModel.OffersOnProperty.Count, Is.EqualTo(1));
-            Assert.That(viewModel.OffersOnProperty.First().PropertyId, Is.EqualTo(0));
+            Assert.That(viewModel.ViewingsForProperty.Count, Is.EqualTo(1));
+            Assert.That(viewModel.ViewingsForProperty.First().PropertyId, Is.EqualTo(returnedProperty.Id));
         }
     }
 }

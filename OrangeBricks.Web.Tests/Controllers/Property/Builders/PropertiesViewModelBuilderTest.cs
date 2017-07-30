@@ -37,9 +37,10 @@ namespace OrangeBricks.Web.Tests.Controllers.Property.Builders
             // Arrange
             var builder = new PropertiesViewModelBuilder(string.Empty, _context);
 
+            var location = new Location { Name = "Test", TimeZone = "Test" };
             var properties = new List<Models.Property>{
-                new Models.Property{ StreetName = "Smith Street", Description = "", IsListedForSale = true, Offers = new Offer[0] },
-                new Models.Property{ StreetName = "Jones Street", Description = "", IsListedForSale = true, Offers = new Offer[0]}
+                new Models.Property{ StreetName = "Smith Street", Location = location, Description = "", IsListedForSale = true, Offers = new Offer[0], Viewings = new Viewing[0]},
+                new Models.Property{ StreetName = "Jones Street", Location = location, Description = "", IsListedForSale = true, Offers = new Offer[0], Viewings = new Viewing[0]}
             };
 
             var mockSet = Substitute.For<IDbSet<Models.Property>>()
@@ -65,9 +66,10 @@ namespace OrangeBricks.Web.Tests.Controllers.Property.Builders
             // Arrange
             var builder = new PropertiesViewModelBuilder(string.Empty, _context);
 
+            var location = new Location { Name = "", TimeZone = "" };
             var properties = new List<Models.Property>{
-                new Models.Property{ StreetName = "", Description = "Great location", IsListedForSale = true, Offers = new Offer[0] },
-                new Models.Property{ StreetName = "", Description = "Town house", IsListedForSale = true, Offers = new Offer[0] }
+                new Models.Property{ StreetName = "", Location = location, Description = "Great location", IsListedForSale = true, Offers = new Offer[0], Viewings = new Viewing[0]},
+                new Models.Property{ StreetName = "", Location = location, Description = "Town house", IsListedForSale = true, Offers = new Offer[0], Viewings = new Viewing[0]}
             };
 
             var mockSet = Substitute.For<IDbSet<Models.Property>>()
