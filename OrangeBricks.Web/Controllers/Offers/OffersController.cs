@@ -19,7 +19,7 @@ namespace OrangeBricks.Web.Controllers.Offers
 
         public ActionResult MyOffers()
         {
-            var username = this.User.Identity.GetUserName();
+            var username = this.User.Identity.GetUserId();
             var builder = new MyOffersViewModelBuilder(username, _context);
             var viewModel = builder.Build();
 

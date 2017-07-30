@@ -37,8 +37,8 @@ namespace OrangeBricks.Web.Tests.Controllers.Viewings.Builders
         [Test]
         public void BuildShouldReturnViewingsForTheCurrentUser()
         {
-            var username = "user";
-            var builder = new MyViewingsViewModelBuilder(username, _context);
+            var userId = "user";
+            var builder = new MyViewingsViewModelBuilder(userId, _context);
 
             var location = new Location { Name = "Test", TimeZone = "Test" };
             var properties = new List<Models.Property>{
@@ -49,9 +49,9 @@ namespace OrangeBricks.Web.Tests.Controllers.Viewings.Builders
             var returnedProperty = properties[0];
             var viewings = new List<Viewing>
             {
-                new Viewing { Username = "", Property = properties[1] },
-                new Viewing { Username = username, Property = returnedProperty }, //Should be returned
-                new Viewing { Username = "", Property = properties[1] },
+                new Viewing { UserId = "", Property = properties[1] },
+                new Viewing { UserId = userId, Property = returnedProperty }, //Should be returned
+                new Viewing { UserId = "", Property = properties[1] },
             };
 
             var offersMockSet = Substitute.For<IDbSet<Offer>>()
@@ -81,7 +81,7 @@ namespace OrangeBricks.Web.Tests.Controllers.Viewings.Builders
             var location = new Location { Name = "Test", TimeZone = "Eastern Standard Time" };
             var viewings = new List<Viewing>
             {
-                new Viewing { Username = username, Date = date, Property = new Models.Property { Location = location } },
+                new Viewing { UserId = username, Date = date, Property = new Models.Property { Location = location } },
             };
 
             var viewingsMockSet = Substitute.For<IDbSet<Viewing>>()

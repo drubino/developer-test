@@ -48,9 +48,9 @@ namespace OrangeBricks.Web.Tests.Controllers.Offers.Builders
 
             var offers = new List<Offer>
             {
-                new Offer { Username = "", Property = properties[0] },
-                new Offer { Username = username, Property = properties[0] }, //Should be returned
-                new Offer { Username = "", Property = properties[1] },
+                new Offer { UserId = "", Property = properties[0] },
+                new Offer { UserId = username, Property = properties[0] }, //Should be returned
+                new Offer { UserId = "", Property = properties[1] },
             };
 
             var offersMockSet = Substitute.For<IDbSet<Offer>>()

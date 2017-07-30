@@ -8,12 +8,12 @@ namespace OrangeBricks.Web.Controllers.Viewings.Builders
 {
     internal class MyViewingsViewModelBuilder
     {
-        private string _username;
+        private string _userId;
         private IOrangeBricksContext _context;
 
-        public MyViewingsViewModelBuilder(string username, IOrangeBricksContext context)
+        public MyViewingsViewModelBuilder(string userId, IOrangeBricksContext context)
         {
-            _username = username;
+            _userId = userId;
             _context = context;
         }
 
@@ -23,7 +23,7 @@ namespace OrangeBricks.Web.Controllers.Viewings.Builders
                 .Include(o => o.Property)
                 .Include(o => o.Property.Location)
                 .Where(o => o.Status != ViewingStatus.Removed)
-                .Where(o => o.Username == _username)
+                .Where(o => o.UserId == _userId)
                 .ToList();
 
             var viewModel = new MyViewingsViewModel

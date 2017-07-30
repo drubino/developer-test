@@ -10,12 +10,12 @@ namespace OrangeBricks.Web.Controllers.Property.Commands
 {
     public class ScheduleViewingCommandHandler
     {
-        private readonly string _username;
+        private readonly string _userId;
         private readonly IOrangeBricksContext _context;
 
-        public ScheduleViewingCommandHandler(string username, IOrangeBricksContext context)
+        public ScheduleViewingCommandHandler(string userId, IOrangeBricksContext context)
         {
-            _username = username;
+            _userId = userId;
             _context = context;
         }
 
@@ -35,7 +35,7 @@ namespace OrangeBricks.Web.Controllers.Property.Commands
 
             var existingViewing = property.Viewings
                 .Where(o => o.Status != ViewingStatus.Removed)
-                .SingleOrDefault(o => o.Username == _username);
+                .SingleOrDefault(o => o.UserId == _userId);
 
             if (existingViewing != null)
                 throw new InvalidOperationException("The user already has an active viewing on the property");
@@ -47,7 +47,7 @@ namespace OrangeBricks.Web.Controllers.Property.Commands
             var viewing = new Viewing
             {
                 PropertyId = property.Id,
-                Username = _username,
+                UserId = _userId,
                 Date = viewingDate,
                 Status = ViewingStatus.Scheduled,
                 CreatedAt = DateTime.Now,

@@ -22,7 +22,7 @@ namespace OrangeBricks.Web.Controllers.Viewings
         [OrangeBricksAuthorize(Roles = "Buyer")]
         public ActionResult MyViewings()
         {
-            var username = this.User.Identity.GetUserName();
+            var username = this.User.Identity.GetUserId();
             var builder = new MyViewingsViewModelBuilder(username, _context);
             var viewModel = builder.Build();
 

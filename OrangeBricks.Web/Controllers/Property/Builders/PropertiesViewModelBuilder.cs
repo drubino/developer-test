@@ -10,12 +10,12 @@ namespace OrangeBricks.Web.Controllers.Property.Builders
 {
     public class PropertiesViewModelBuilder
     {
-        private readonly string _username;
+        private readonly string _userId;
         private readonly IOrangeBricksContext _context;
 
         public PropertiesViewModelBuilder(string username, IOrangeBricksContext context)
         {
-            _username = username;
+            _userId = username;
             _context = context;
         }
 

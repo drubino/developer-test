@@ -10,12 +10,12 @@ namespace OrangeBricks.Web.Controllers.Property.Commands
 {
     public class MakeOfferCommandHandler
     {
-        private readonly string _username;
+        private readonly string _userId;
         private readonly IOrangeBricksContext _context;
 
-        public MakeOfferCommandHandler(string username, IOrangeBricksContext context)
+        public MakeOfferCommandHandler(string userId, IOrangeBricksContext context)
         {
-            _username = username;
+            _userId = userId;
             _context = context;
         }
 
@@ -27,7 +27,7 @@ namespace OrangeBricks.Web.Controllers.Property.Commands
 
             var existingOffer = property.Offers
                 .Where(o => o.Status != OfferStatus.Removed)
-                .SingleOrDefault(o => o.Username == _username);
+                .SingleOrDefault(o => o.UserId == _userId);
 
             if (existingOffer != null)
                 throw new InvalidOperationException("The user already has an active offer on the property");
@@ -35,7 +35,7 @@ namespace OrangeBricks.Web.Controllers.Property.Commands
             var offer = new Offer
             {
                 PropertyId = property.Id,
-                Username = _username,
+                UserId = _userId,
                 Amount = command.Offer,
                 Status = OfferStatus.Pending,
                 CreatedAt = DateTime.Now,

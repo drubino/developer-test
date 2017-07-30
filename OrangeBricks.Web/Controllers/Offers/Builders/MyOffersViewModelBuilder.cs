@@ -7,12 +7,12 @@ namespace OrangeBricks.Web.Controllers.Offers.Builders
 {
     internal class MyOffersViewModelBuilder
     {
-        private string _username;
+        private string _userId;
         private IOrangeBricksContext _context;
 
-        public MyOffersViewModelBuilder(string username, IOrangeBricksContext context)
+        public MyOffersViewModelBuilder(string userId, IOrangeBricksContext context)
         {
-            _username = username;
+            _userId = userId;
             _context = context;
         }
 
@@ -22,7 +22,7 @@ namespace OrangeBricks.Web.Controllers.Offers.Builders
                 .Include(o => o.Property)
                 .Include(o => o.Property.Location)
                 .Where(o => o.Status != OfferStatus.Removed)
-                .Where(o => o.Username == _username)
+                .Where(o => o.UserId == _userId)
                 .ToList();
 
             var viewModel = new MyOffersViewModel

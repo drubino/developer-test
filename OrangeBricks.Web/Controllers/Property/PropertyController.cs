@@ -22,7 +22,7 @@ namespace OrangeBricks.Web.Controllers.Property
 
         public ActionResult Index(PropertiesQuery query)
         {
-            var username = this.User.Identity.GetUserName();
+            var username = this.User.Identity.GetUserId();
             var builder = new PropertiesViewModelBuilder(username, _context);
             var viewModel = builder.Build(query);
 
@@ -45,7 +45,7 @@ namespace OrangeBricks.Web.Controllers.Property
         public ActionResult Create(CreatePropertyCommand command)
         {
             var handler = new CreatePropertyCommandHandler(_context);
-            command.SellerUserId = User.Identity.GetUserName();
+            command.SellerUserId = User.Identity.GetUserId();
             handler.Handle(command);
 
             return RedirectToAction("MyProperties");
@@ -55,8 +55,8 @@ namespace OrangeBricks.Web.Controllers.Property
         [OrangeBricksAuthorize(Roles = "Seller")]
         public ActionResult MyProperties()
         {
-            var username = User.Identity.GetUserId();
-            var builder = new MyPropertiesViewModelBuilder(username, _context);
+            var userId = User.Identity.GetUserId();
+            var builder = new MyPropertiesViewModelBuilder(userId, _context);
             var viewModel = builder.Build();
 
             return View(viewModel);
@@ -88,7 +88,7 @@ namespace OrangeBricks.Web.Controllers.Property
         [OrangeBricksAuthorize(Roles = "Buyer")]
         public ActionResult MakeOffer(MakeOfferCommand command)
         {
-            var username = this.User.Identity.GetUserName();
+            var username = this.User.Identity.GetUserId();
             var handler = new MakeOfferCommandHandler(username, _context);
             handler.Handle(command);
 
@@ -109,7 +109,7 @@ namespace OrangeBricks.Web.Controllers.Property
         [OrangeBricksAuthorize(Roles = "Buyer")]
         public ActionResult ScheduleViewing(ScheduleViewingCommand command)
         {
-            var username = this.User.Identity.GetUserName();
+            var username = this.User.Identity.GetUserId();
             var handler = new ScheduleViewingCommandHandler(username, _context);
             handler.Handle(command);
             

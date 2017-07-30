@@ -9,8 +9,8 @@ namespace OrangeBricks.Web.Models
         [Key]
         public int Id { get; set; }
 
-        [MaxLength(100)]
-        public string Username { get; set; }
+        [Required]
+        public string UserId { get; set; }
 
         public int PropertyId { get; set; }
         public Property Property { get; set; }
