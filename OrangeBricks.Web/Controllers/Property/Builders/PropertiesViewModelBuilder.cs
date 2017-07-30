@@ -28,9 +28,11 @@ namespace OrangeBricks.Web.Controllers.Property.Builders
                     Property = p,
                     Location = p.Location,
                     OfferCount = p.Offers
+                        .Where(o => o.UserId == _userId)
                         .Where(o => o.Status != OfferStatus.Removed)
                         .Count(),
                     ViewingCount = p.Viewings
+                        .Where(o => o.UserId == _userId)
                         .Where(o => o.Status != ViewingStatus.Removed)
                         .Count()
                 })
