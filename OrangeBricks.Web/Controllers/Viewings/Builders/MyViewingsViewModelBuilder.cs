@@ -58,7 +58,7 @@ namespace OrangeBricks.Web.Controllers.Viewings.Builders
         public string FormatTime(DateTime date, string propertyTimeZone)
         {
             var timeZoneAbbrevation = string.Join("", propertyTimeZone.Split(' ').Select(s => s.Substring(0, 1))).ToUpper();
-            var timeString = $"{date.ToString("hh:mm:ss tt")} {timeZoneAbbrevation}";
+            var timeString = $"{date.ToString("hh:mm tt")} {timeZoneAbbrevation}";
             if (timeString.StartsWith("0"))
                 timeString = timeString.Substring(1);
 

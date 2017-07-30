@@ -67,5 +67,32 @@ namespace OrangeBricks.Web.Tests.Controllers.Viewings.Builders
             Assert.That(viewModel.ViewingsForProperty.Count, Is.EqualTo(1));
             Assert.That(viewModel.ViewingsForProperty.First().PropertyId, Is.EqualTo(returnedProperty.Id));
         }
+
+        [Test]
+        public void BuildShouldReturnFormattedDates()
+        {
+            var username = "user";
+            var builder = new MyViewingsViewModelBuilder(username, _context);
+
+            var date = new DateTime(2000, 1, 1, 13, 0, 0);
+            var formattedDate = "Saturday, January 1, 2000";
+            var formattedTime = "1:00 PM EST";
+
+            var location = new Location { Name = "Test", TimeZone = "Eastern Standard Time" };
+            var viewings = new List<Viewing>
+            {
+                new Viewing { Username = username, Date = date, Property = new Models.Property { Location = location } },
+            };
+
+            var viewingsMockSet = Substitute.For<IDbSet<Viewing>>()
+                .Initialize(viewings.AsQueryable());
+
+            _context.Viewings.Returns(viewingsMockSet);
+
+            var viewModel = builder.Build();
+            var viewingViewModel = viewModel.ViewingsForProperty.First().Viewings.First();
+            Assert.That(viewingViewModel.ViewingDate, Is.EqualTo(formattedDate));
+            Assert.That(viewingViewModel.ViewingTime, Is.EqualTo(formattedTime));
+        }
     }
 }

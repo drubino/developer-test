@@ -96,10 +96,16 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controllers\Offers\Builders\MyOffersViewModelBuilderTest.cs" />
+    <Compile Include="Controllers\Offers\Commands\RemoveOfferCommandHandlerTest.cs" />
+    <Compile Include="Controllers\Offers\Commands\RejectOfferCommandHandlerTest.cs" />
+    <Compile Include="Controllers\Offers\Commands\AcceptOfferCommandHandlerTest.cs" />
     <Compile Include="Controllers\Property\Builders\PropertiesViewModelBuilderTest.cs" />
     <Compile Include="Controllers\Property\Commands\CreatePropertyCommandHandlerTest.cs" />
     <Compile Include="Controllers\Property\Commands\ListPropertyCommandHandlerTest.cs" />
     <Compile Include="Controllers\Viewings\Builders\MyViewingsViewModelBuilderTest.cs" />
+    <Compile Include="Controllers\Viewings\Commands\RemoveViewingCommandHandlerTest.cs" />
+    <Compile Include="Controllers\Viewings\Commands\CancelViewingCommandHandlerTest.cs" />
+    <Compile Include="Controllers\Viewings\Commands\BookViewingCommandHandlerTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
