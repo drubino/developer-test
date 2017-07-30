@@ -31,7 +31,7 @@
                     <div class="alert @viewing.StatusClass">
                         <strong>@viewing.Status</strong>
                     </div>
-                    @if (viewing.Status == ViewingStatus.Removed || viewing.Status == ViewingStatus.Scheduled)
+                    @if (viewing.Status == ViewingStatus.Cancelled || viewing.Status == ViewingStatus.Scheduled)
                     {
                         using (Html.BeginForm("Remove", "Viewings"))
                         {
